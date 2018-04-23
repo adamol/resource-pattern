@@ -26,6 +26,13 @@ class Controller
 
         $input = $this->hydrator->hydrate($data, InputResource::class);
 
+        $errors = $this->validator->validate($input);
+        //$errors = $this->validator->validate(new InputResource('', ''));
+
+        if (count($errors) > 0) {
+            var_dump((string) $errors);
+        }
+
         // use $input to call services etc
         // grab return values from services to return to user
 

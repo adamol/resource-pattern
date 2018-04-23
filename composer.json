@@ -2,7 +2,8 @@
     "require": {
         "symfony/validator": "^3.4",
         "silex/silex": "^2.2",
-        "zendframework/zend-hydrator": "^2.3"
+        "zendframework/zend-hydrator": "^2.3",
+        "doctrine/common": "^2.7"
     },
     "autoload": {
         "psr-4": {
