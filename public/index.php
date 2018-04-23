@@ -2,11 +2,13 @@
 
 $loader = require __DIR__.'/../vendor/autoload.php';
 
+use Silex\AppArgumentValueResolver;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Silex\Provider\ValidatorServiceProvider;
 use Symfony\Component\Validator\Mapping\Loader\AnnotationLoader;
 use Symfony\Component\Validator\Mapping\Factory\LazyLoadingMetadataFactory;
 use Doctrine\Common\Annotations\AnnotationReader;
+use Symfony\Component\HttpKernel\Controller\ArgumentResolver;
 
 \Doctrine\Common\Annotations\AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 
@@ -16,6 +18,13 @@ $app['debug'] = true;
 
 $app->register(new Silex\Provider\ServiceControllerServiceProvider());
 $app->register(new ValidatorServiceProvider());
+
+$app['argument_value_resolvers'] = function($app) {
+    return array_merge([
+        new AppArgumentValueResolver($app),
+        new Framework\ResourceArgumentValueResolver($app)
+    ], ArgumentResolver::getDefaultArgumentValueResolvers());
+};
 
 $app['validator.mapping.class_metadata_factory'] = function ($app) {
     $loader = new AnnotationLoader(new AnnotationReader());

@@ -4,7 +4,7 @@ namespace Posts;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class InputResource
+class InputResource extends \Framework\Resource
 {
     /**
      * @Assert\NotBlank()
