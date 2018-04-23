@@ -1,0 +1,12 @@
+{
+    "require": {
+        "jms/serializer": "^1.11",
+        "symfony/validator": "^3.4",
+        "silex/silex": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Posts\\": "src/Posts/"
+        }
+    }
+}
