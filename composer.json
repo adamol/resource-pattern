@@ -1,11 +1,12 @@
 {
     "require": {
-        "jms/serializer": "^1.11",
         "symfony/validator": "^3.4",
-        "silex/silex": "^2.2"
+        "silex/silex": "^2.2",
+        "zendframework/zend-hydrator": "^2.3"
     },
     "autoload": {
         "psr-4": {
+            "Framework\\": "Framework/",
             "Posts\\": "src/Posts/"
         }
     }
