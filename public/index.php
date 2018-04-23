@@ -2,6 +2,7 @@
 
 $loader = require __DIR__.'/../vendor/autoload.php';
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Silex\Provider\ValidatorServiceProvider;
 use Symfony\Component\Validator\Mapping\Loader\AnnotationLoader;
 use Symfony\Component\Validator\Mapping\Factory\LazyLoadingMetadataFactory;
@@ -34,6 +35,14 @@ $app['framework.hydrator'] = function($app) {
 $app['posts.controller'] = function($app) {
     return new Posts\Controller($app['framework.hydrator'], $app['validator']);
 };
+
+$app->on(Symfony\Component\HttpKernel\KernelEvents::VIEW, function (Symfony\Component\HttpKernel\Event\GetResponseEvent $event) use ($app) {
+    $value = $event->getControllerResult();
+
+    $response = new JsonResponse($app['framework.hydrator']->extract($value));
+
+    $event->setResponse($response);
+});
 
 $app->get('/', 'posts.controller:index');
 

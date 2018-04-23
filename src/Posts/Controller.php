@@ -2,8 +2,6 @@
 
 namespace Posts;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
-
 class Controller
 {
     private $hydrator;
@@ -36,8 +34,6 @@ class Controller
         // use $input to call services etc
         // grab return values from services to return to user
 
-        $output = new OutputResource('foo', 'bar');
-
-        return new JsonResponse($this->hydrator->extract($output));
+        return new OutputResource('foo', 'bar');
     }
 }
